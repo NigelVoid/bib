@@ -6,35 +6,16 @@ from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow
 from PyQt5 import QtWidgets, QtCore
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(520, 365)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 520, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.btn = QPushButton('Рисовать', self)
-        self.btn.move(220, 300)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-
-
-class Example(QMainWindow, Ui_MainWindow):
+class Example(QWidget):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 520, 365)
+        self.setWindowTitle('Рисование')
+        self.btn = QPushButton('Рисовать', self)
+        self.btn.move(220, 300)
         self.do_paint = False
         self.btn.clicked.connect(self.paint)
 
@@ -52,11 +33,11 @@ class Example(QMainWindow, Ui_MainWindow):
 
     def draw_flag(self, qp):
         r = random.randint(1, 100)
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)))
         qp.drawEllipse(30, 30, r, r)
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)))
         qp.drawEllipse(200, 30, r, r)
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)))
         qp.drawEllipse(400, 30, r, r)
 
 
